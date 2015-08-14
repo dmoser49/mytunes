@@ -17,9 +17,10 @@ var SongQueue = Songs.extend({
     }, this),
 
     this.on('dequeue', function(song){
-      var index = this.findWhere(song.attributes);
+      var index = this.indexOf(song);
+      console.log('index', index)
       this.remove(song)
-      if (index === 0){
+      if (index === 0 && this.length !== 0 ){
         this.playFirst();
       }
     }, this)
