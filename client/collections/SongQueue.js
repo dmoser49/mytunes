@@ -20,8 +20,12 @@ var SongQueue = Songs.extend({
       var index = this.indexOf(song);
       console.log('index', index)
       this.remove(song)
-      if (index === 0 && this.length !== 0 ){
-        this.playFirst();
+      if (index === 0){
+        if (this.length !== 0){
+          this.playFirst();
+        } else{
+          this.stop();
+        }
       }
     }, this)
   },
@@ -29,6 +33,11 @@ var SongQueue = Songs.extend({
   playFirst: function(){
     this.at(0).play();
     console.log(this.at(0));
+  },
+
+  stop: function(){
+    this.trigger('stop', this);
+    console.log('stopping');
   }
 
 });
